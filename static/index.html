@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable Section Comparison</title>
+    <meta name="description" content="Find out which sections share the same lecturers with your section">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Section Comparison</h1>
+            <p class="subtitle">Discover which sections share your lecturers</p>
+        </header>
+
+        <div class="selector-container">
+            <div class="selector-wrapper">
+                <label for="section-select">Select Your Section</label>
+                <select id="section-select">
+                    <option value="">Choose section...</option>
+                </select>
+                <span class="select-icon">▼</span>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+        </div>
+
+        <div class="stats-bar" id="stats-bar" style="display: none;">
+            <div class="stat-item">
+                <div class="stat-value" id="total-courses">0</div>
+                <div class="stat-label">Courses</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="shared-count">0</div>
+                <div class="stat-label">Shared Connections</div>
+            </div>
+        </div>
+
+        <div id="results">
+            <div class="empty-state">
+                <div class="empty-state-icon">📚</div>
+                <p class="empty-state-text">Select a section to see shared lecturers</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
