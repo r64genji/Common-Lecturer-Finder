@@ -298,7 +298,24 @@ async function downloadAsImage() {
             backgroundColor: '#0f0f1a',
             scale: 2,
             useCORS: true,
-            logging: false
+            logging: false,
+            windowWidth: 1600, // Pretend we are on a large screen
+            onclone: (clonedDoc) => {
+                const clonedExport = clonedDoc.getElementById('timetable-export');
+                if (clonedExport) {
+                    // Force desktop width and ensure visibility
+                    clonedExport.style.width = '1400px';
+                    clonedExport.style.maxWidth = 'none';
+                    clonedExport.style.overflow = 'visible';
+                    // Ensure the container allows expanding
+                    const container = clonedDoc.querySelector('.timetable-container');
+                    if (container) container.style.width = '1400px';
+
+                    // Force table to respect min-widths
+                    const table = clonedDoc.getElementById('timetable');
+                    if (table) table.style.width = '100%';
+                }
+            }
         });
 
         // Ensure 16:9 aspect ratio while keeping ALL content visible
@@ -370,7 +387,24 @@ async function downloadAsPdf() {
             backgroundColor: '#0f0f1a',
             scale: 2,
             useCORS: true,
-            logging: false
+            logging: false,
+            windowWidth: 1600, // Pretend we are on a large screen
+            onclone: (clonedDoc) => {
+                const clonedExport = clonedDoc.getElementById('timetable-export');
+                if (clonedExport) {
+                    // Force desktop width and ensure visibility
+                    clonedExport.style.width = '1400px';
+                    clonedExport.style.maxWidth = 'none';
+                    clonedExport.style.overflow = 'visible';
+                    // Ensure the container allows expanding
+                    const container = clonedDoc.querySelector('.timetable-container');
+                    if (container) container.style.width = '1400px';
+
+                    // Force table to respect min-widths
+                    const table = clonedDoc.getElementById('timetable');
+                    if (table) table.style.width = '100%';
+                }
+            }
         });
 
         // Ensure 16:9 aspect ratio while keeping ALL content visible
