@@ -481,6 +481,11 @@ select:focus {
         background: var(--border-color);
     }
 
+    .timetable {
+        width: max-content;
+        min-width: 100%;
+    }
+
     .timetable th,
     .timetable td {
         min-width: 120px;
