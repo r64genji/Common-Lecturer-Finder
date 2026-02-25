@@ -8,6 +8,7 @@ from timetable_parser_visual import parse_timetable_pdf
 from web_parser import get_fspf_sections, get_web_timetable
 import os
 import tempfile
+import threading
 
 app = Flask(__name__, static_folder='static')
 TIMETABLES_DIR = "timetables"
@@ -16,6 +17,17 @@ TIMETABLES_DIR = "timetables"
 print("Loading timetable data...")
 ALL_SECTIONS = parse_all_timetables()
 print(f"Loaded {len(ALL_SECTIONS)} sections")
+
+def warmup_cache():
+    print("Warming up web parser sections cache...")
+    try:
+        get_fspf_sections()
+        print("Web parser sections cache warmed up.")
+    except Exception as e:
+        print(f"Failed to warm up cache: {e}")
+
+# Start the warmup in a background thread
+threading.Thread(target=warmup_cache, daemon=True).start()
 
 
 @app.route('/')

@@ -53,11 +53,43 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function loadSections() {
+    const defaultOption = sectionSelect.querySelector('option');
     try {
-        const response = await fetch('/api/prettier/sections');
-        const data = await response.json();
+        const cacheKey = 'prettier_sections';
+        const cacheTimeKey = 'prettier_sections_time';
 
-        data.sections.forEach(section => {
+        const cachedSections = localStorage.getItem(cacheKey);
+        const cacheTime = localStorage.getItem(cacheTimeKey);
+        const cacheAge = cacheTime ? Date.now() - parseInt(cacheTime) : Infinity;
+
+        let sections = [];
+
+        // Use cache if less than 24 hours old
+        if (cachedSections && cacheAge < 24 * 60 * 60 * 1000) {
+            sections = JSON.parse(cachedSections);
+        } else {
+            if (defaultOption) {
+                defaultOption.textContent = "Loading sections...";
+                sectionSelect.disabled = true;
+            }
+
+            try {
+                const response = await fetch('/api/prettier/sections');
+                const data = await response.json();
+                sections = data.sections || [];
+
+                // Save to cache
+                localStorage.setItem(cacheKey, JSON.stringify(sections));
+                localStorage.setItem(cacheTimeKey, Date.now().toString());
+            } finally {
+                if (defaultOption) {
+                    defaultOption.textContent = "Choose a section...";
+                    sectionSelect.disabled = false;
+                }
+            }
+        }
+
+        sections.forEach(section => {
             const option = document.createElement('option');
             option.value = section.id;
             option.textContent = section.name;
@@ -66,6 +98,10 @@ async function loadSections() {
         });
     } catch (error) {
         console.error('Failed to load sections:', error);
+        if (defaultOption) {
+            defaultOption.textContent = "Error loading sections";
+            sectionSelect.disabled = false;
+        }
     }
 }
 
@@ -297,7 +333,8 @@ async function downloadAsImage() {
         downloadImageBtn.textContent = 'Generating...';
 
         const wrapper = exportArea.querySelector('.timetable-wrapper');
-        const fullWidth = Math.max(exportArea.scrollWidth, wrapper.scrollWidth + 32);
+        const isScrollable = wrapper.scrollWidth > wrapper.clientWidth;
+        const targetWidth = wrapper.scrollWidth;
 
         // Capture the export area (title + table only)
         const canvas = await html2canvas(exportArea, {
@@ -305,19 +342,23 @@ async function downloadAsImage() {
             scale: 2,
             useCORS: true,
             logging: false,
-            windowWidth: fullWidth,
+            windowWidth: isScrollable ? targetWidth + 32 : undefined,
             onclone: (clonedDoc) => {
                 const clonedExportArea = clonedDoc.getElementById('timetable-export');
-                if (clonedExportArea) {
+                if (clonedExportArea && isScrollable) {
                     const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
                     if (clonedWrapper) {
                         clonedWrapper.style.overflow = 'visible';
-                        clonedWrapper.style.width = 'max-content';
+                        clonedWrapper.style.width = targetWidth + 'px';
                     }
-                    clonedExportArea.style.width = 'max-content';
+                    clonedExportArea.style.width = (targetWidth + 32) + 'px';
                 }
             }
         });
+
+        if (!canvas || canvas.width === 0 || canvas.height === 0) {
+            throw new Error('Failed to generate rendering canvas.');
+        }
 
         // Ensure 16:9 aspect ratio while keeping ALL content visible
         const targetRatio = 16 / 9;
@@ -384,7 +425,8 @@ async function downloadAsPdf() {
         downloadPdfBtn.textContent = 'Generating...';
 
         const wrapper = exportArea.querySelector('.timetable-wrapper');
-        const fullWidth = Math.max(exportArea.scrollWidth, wrapper.scrollWidth + 32);
+        const isScrollable = wrapper.scrollWidth > wrapper.clientWidth;
+        const targetWidth = wrapper.scrollWidth;
 
         // Capture the export area (title + table only)
         const canvas = await html2canvas(exportArea, {
@@ -392,19 +434,23 @@ async function downloadAsPdf() {
             scale: 2,
             useCORS: true,
             logging: false,
-            windowWidth: fullWidth,
+            windowWidth: isScrollable ? targetWidth + 32 : undefined,
             onclone: (clonedDoc) => {
                 const clonedExportArea = clonedDoc.getElementById('timetable-export');
-                if (clonedExportArea) {
+                if (clonedExportArea && isScrollable) {
                     const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
                     if (clonedWrapper) {
                         clonedWrapper.style.overflow = 'visible';
-                        clonedWrapper.style.width = 'max-content';
+                        clonedWrapper.style.width = targetWidth + 'px';
                     }
-                    clonedExportArea.style.width = 'max-content';
+                    clonedExportArea.style.width = (targetWidth + 32) + 'px';
                 }
             }
         });
+
+        if (!canvas || canvas.width === 0 || canvas.height === 0) {
+            throw new Error('Failed to generate rendering canvas.');
+        }
 
         // Ensure 16:9 aspect ratio while keeping ALL content visible
         const targetRatio = 16 / 9;
