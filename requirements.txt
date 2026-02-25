@@ -1,2 +1,4 @@
 flask
 pymupdf
+requests
+beautifulsoup4
