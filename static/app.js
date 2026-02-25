@@ -25,13 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadSections() {
         try {
-            const response = await fetch('/api/sections');
+            // Add cache busting query param to avoid retrieving the broken cached response
+            const response = await fetch('/api/sections?_t=' + new Date().getTime());
             const data = await response.json();
 
             data.sections.forEach(section => {
                 const option = document.createElement('option');
-                option.value = section;
-                option.textContent = `Section ${section}`;
+                // Support both object form (from cached/broken response) and integer form
+                if (typeof section === 'object' && section !== null) {
+                    option.value = section.id || section.name;
+                    option.textContent = section.name || `Section ${section.id}`;
+                } else {
+                    option.value = section;
+                    option.textContent = `Section ${section}`;
+                }
                 sectionSelect.appendChild(option);
             });
         } catch (error) {

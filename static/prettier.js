@@ -54,13 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadSections() {
     try {
-        const response = await fetch('/api/sections');
+        const response = await fetch('/api/prettier/sections');
         const data = await response.json();
 
         data.sections.forEach(section => {
             const option = document.createElement('option');
-            option.value = section;
-            option.textContent = `Section ${section}`;
+            option.value = section.id;
+            option.textContent = section.name;
+            option.dataset.name = section.name;
             sectionSelect.appendChild(option);
         });
     } catch (error) {
@@ -72,7 +73,8 @@ function setupEventListeners() {
     // Section select
     sectionSelect.addEventListener('change', async (e) => {
         if (e.target.value) {
-            await loadTimetable(e.target.value);
+            const selectedOption = e.target.options[e.target.selectedIndex];
+            await loadTimetable(e.target.value, selectedOption.dataset.name);
         }
     });
 
@@ -113,11 +115,12 @@ function setupEventListeners() {
     });
 }
 
-async function loadTimetable(section) {
+async function loadTimetable(sectionId, sectionName = "") {
     showLoading();
 
     try {
-        const response = await fetch(`/api/timetable/${section}`);
+        const nameQuery = sectionName ? `?name=${encodeURIComponent(sectionName)}` : '';
+        const response = await fetch(`/api/prettier/timetable/${sectionId}${nameQuery}`);
         const data = await response.json();
 
         if (data.error) {
@@ -298,24 +301,7 @@ async function downloadAsImage() {
             backgroundColor: '#0f0f1a',
             scale: 2,
             useCORS: true,
-            logging: false,
-            windowWidth: 1600, // Pretend we are on a large screen
-            onclone: (clonedDoc) => {
-                const clonedExport = clonedDoc.getElementById('timetable-export');
-                if (clonedExport) {
-                    // Force desktop width and ensure visibility
-                    clonedExport.style.width = '1400px';
-                    clonedExport.style.maxWidth = 'none';
-                    clonedExport.style.overflow = 'visible';
-                    // Ensure the container allows expanding
-                    const container = clonedDoc.querySelector('.timetable-container');
-                    if (container) container.style.width = '1400px';
-
-                    // Force table to respect min-widths
-                    const table = clonedDoc.getElementById('timetable');
-                    if (table) table.style.width = '100%';
-                }
-            }
+            logging: false
         });
 
         // Ensure 16:9 aspect ratio while keeping ALL content visible
@@ -387,24 +373,7 @@ async function downloadAsPdf() {
             backgroundColor: '#0f0f1a',
             scale: 2,
             useCORS: true,
-            logging: false,
-            windowWidth: 1600, // Pretend we are on a large screen
-            onclone: (clonedDoc) => {
-                const clonedExport = clonedDoc.getElementById('timetable-export');
-                if (clonedExport) {
-                    // Force desktop width and ensure visibility
-                    clonedExport.style.width = '1400px';
-                    clonedExport.style.maxWidth = 'none';
-                    clonedExport.style.overflow = 'visible';
-                    // Ensure the container allows expanding
-                    const container = clonedDoc.querySelector('.timetable-container');
-                    if (container) container.style.width = '1400px';
-
-                    // Force table to respect min-widths
-                    const table = clonedDoc.getElementById('timetable');
-                    if (table) table.style.width = '100%';
-                }
-            }
+            logging: false
         });
 
         // Ensure 16:9 aspect ratio while keeping ALL content visible

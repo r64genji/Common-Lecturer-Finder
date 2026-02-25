@@ -59,8 +59,9 @@ async function loadSections() {
 
         data.sections.forEach(section => {
             const option = document.createElement('option');
-            option.value = section;
-            option.textContent = `Section ${section}`;
+            option.value = section.id;
+            option.textContent = section.name;
+            option.dataset.name = section.name;
             sectionSelect.appendChild(option);
         });
     } catch (error) {
@@ -72,7 +73,8 @@ function setupEventListeners() {
     // Section select
     sectionSelect.addEventListener('change', async (e) => {
         if (e.target.value) {
-            await loadTimetable(e.target.value);
+            const selectedOption = e.target.options[e.target.selectedIndex];
+            await loadTimetable(e.target.value, selectedOption.dataset.name);
         }
     });
 
@@ -113,11 +115,12 @@ function setupEventListeners() {
     });
 }
 
-async function loadTimetable(section) {
+async function loadTimetable(sectionId, sectionName = "") {
     showLoading();
 
     try {
-        const response = await fetch(`/api/timetable/${section}`);
+        const nameQuery = sectionName ? `?name=${encodeURIComponent(sectionName)}` : '';
+        const response = await fetch(`/api/timetable/${sectionId}${nameQuery}`);
         const data = await response.json();
 
         if (data.error) {
