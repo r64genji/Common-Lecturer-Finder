@@ -296,12 +296,27 @@ async function downloadAsImage() {
         downloadImageBtn.disabled = true;
         downloadImageBtn.textContent = 'Generating...';
 
+        const wrapper = exportArea.querySelector('.timetable-wrapper');
+        const fullWidth = Math.max(exportArea.scrollWidth, wrapper.scrollWidth + 32);
+
         // Capture the export area (title + table only)
         const canvas = await html2canvas(exportArea, {
             backgroundColor: '#0f0f1a',
             scale: 2,
             useCORS: true,
-            logging: false
+            logging: false,
+            windowWidth: fullWidth,
+            onclone: (clonedDoc) => {
+                const clonedExportArea = clonedDoc.getElementById('timetable-export');
+                if (clonedExportArea) {
+                    const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
+                    if (clonedWrapper) {
+                        clonedWrapper.style.overflow = 'visible';
+                        clonedWrapper.style.width = 'max-content';
+                    }
+                    clonedExportArea.style.width = 'max-content';
+                }
+            }
         });
 
         // Ensure 16:9 aspect ratio while keeping ALL content visible
@@ -368,12 +383,27 @@ async function downloadAsPdf() {
         downloadPdfBtn.disabled = true;
         downloadPdfBtn.textContent = 'Generating...';
 
+        const wrapper = exportArea.querySelector('.timetable-wrapper');
+        const fullWidth = Math.max(exportArea.scrollWidth, wrapper.scrollWidth + 32);
+
         // Capture the export area (title + table only)
         const canvas = await html2canvas(exportArea, {
             backgroundColor: '#0f0f1a',
             scale: 2,
             useCORS: true,
-            logging: false
+            logging: false,
+            windowWidth: fullWidth,
+            onclone: (clonedDoc) => {
+                const clonedExportArea = clonedDoc.getElementById('timetable-export');
+                if (clonedExportArea) {
+                    const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
+                    if (clonedWrapper) {
+                        clonedWrapper.style.overflow = 'visible';
+                        clonedWrapper.style.width = 'max-content';
+                    }
+                    clonedExportArea.style.width = 'max-content';
+                }
+            }
         });
 
         // Ensure 16:9 aspect ratio while keeping ALL content visible
