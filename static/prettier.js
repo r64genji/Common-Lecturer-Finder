@@ -332,9 +332,8 @@ async function downloadAsImage() {
         downloadImageBtn.disabled = true;
         downloadImageBtn.textContent = 'Generating...';
 
-        const wrapper = exportArea.querySelector('.timetable-wrapper');
-        const isScrollable = wrapper.scrollWidth > wrapper.clientWidth;
-        const targetWidth = wrapper.scrollWidth;
+        const windowWidth = 1280;
+        const windowHeight = 720;
 
         // Capture the export area (title + table only)
         const canvas = await html2canvas(exportArea, {
@@ -342,16 +341,52 @@ async function downloadAsImage() {
             scale: 2,
             useCORS: true,
             logging: false,
-            windowWidth: isScrollable ? targetWidth + 32 : undefined,
+            windowWidth: windowWidth,
+            windowHeight: windowHeight,
             onclone: (clonedDoc) => {
                 const clonedExportArea = clonedDoc.getElementById('timetable-export');
-                if (clonedExportArea && isScrollable) {
+                if (clonedExportArea) {
+                    clonedExportArea.style.width = windowWidth + 'px';
+                    clonedExportArea.style.height = windowHeight + 'px';
+                    clonedExportArea.style.display = 'flex';
+                    clonedExportArea.style.flexDirection = 'column';
+                    clonedExportArea.style.padding = '32px';
+                    clonedExportArea.style.boxSizing = 'border-box';
+                    clonedExportArea.style.margin = '0';
+
+                    const clonedTitle = clonedExportArea.querySelector('.section-title');
+                    if (clonedTitle) {
+                        clonedTitle.style.flexShrink = '0';
+                        clonedTitle.style.marginBottom = '24px';
+                        clonedTitle.style.fontSize = '2rem';
+                    }
+
                     const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
                     if (clonedWrapper) {
-                        clonedWrapper.style.overflow = 'visible';
-                        clonedWrapper.style.width = targetWidth + 'px';
+                        clonedWrapper.style.flex = '1';
+                        clonedWrapper.style.width = '100%';
+                        clonedWrapper.style.minHeight = '0';
+                        clonedWrapper.style.overflow = 'hidden';
                     }
-                    clonedExportArea.style.width = (targetWidth + 32) + 'px';
+
+                    const clonedTable = clonedExportArea.querySelector('.timetable');
+                    if (clonedTable) {
+                        clonedTable.style.width = '100%';
+                        clonedTable.style.height = '100%';
+
+                        // Optimize font sizes for 1280x720 desktop export
+                        clonedTable.querySelectorAll('th').forEach(th => {
+                            th.style.fontSize = '0.9rem';
+                            th.style.height = '60px';
+                        });
+                        clonedTable.querySelectorAll('th .time-slot').forEach(el => el.style.fontSize = '0.75rem');
+                        clonedTable.querySelectorAll('.course-name').forEach(el => el.style.fontSize = '0.9rem');
+                        clonedTable.querySelectorAll('.course-code').forEach(el => el.style.fontSize = '0.8rem');
+                        clonedTable.querySelectorAll('.course-location').forEach(el => el.style.fontSize = '0.75rem');
+                        clonedTable.querySelectorAll('.course-lecturer').forEach(el => el.style.fontSize = '0.75rem');
+                        clonedTable.querySelectorAll('.day-cell').forEach(el => el.style.fontSize = '0.9rem');
+                        clonedTable.querySelectorAll('.break-content span').forEach(el => el.style.fontSize = '1.3rem');
+                    }
                 }
             }
         });
@@ -360,46 +395,10 @@ async function downloadAsImage() {
             throw new Error('Failed to generate rendering canvas.');
         }
 
-        // Ensure 16:9 aspect ratio while keeping ALL content visible
-        const targetRatio = 16 / 9;
-        const currentRatio = canvas.width / canvas.height;
-
-        let finalCanvas = canvas;
-
-        if (Math.abs(currentRatio - targetRatio) > 0.01) {
-            // Create a new canvas with exact 16:9 ratio
-            finalCanvas = document.createElement('canvas');
-            const ctx = finalCanvas.getContext('2d');
-
-            let newWidth, newHeight;
-
-            if (currentRatio > targetRatio) {
-                // Content is wider than 16:9 - use content width, expand height
-                newWidth = canvas.width;
-                newHeight = Math.round(newWidth / targetRatio);
-            } else {
-                // Content is taller than 16:9 - use content height, expand width
-                newHeight = canvas.height;
-                newWidth = Math.round(newHeight * targetRatio);
-            }
-
-            finalCanvas.width = newWidth;
-            finalCanvas.height = newHeight;
-
-            // Fill with background color
-            ctx.fillStyle = '#0f0f1a';
-            ctx.fillRect(0, 0, newWidth, newHeight);
-
-            // Center the original canvas content
-            const xOffset = Math.round((newWidth - canvas.width) / 2);
-            const yOffset = Math.round((newHeight - canvas.height) / 2);
-            ctx.drawImage(canvas, xOffset, yOffset);
-        }
-
         // Create download link
         const link = document.createElement('a');
         link.download = `${currentSectionName.replace(/\s+/g, '_')}.png`;
-        link.href = finalCanvas.toDataURL('image/png');
+        link.href = canvas.toDataURL('image/png');
         link.click();
     } catch (error) {
         console.error('Failed to generate image:', error);
@@ -424,9 +423,8 @@ async function downloadAsPdf() {
         downloadPdfBtn.disabled = true;
         downloadPdfBtn.textContent = 'Generating...';
 
-        const wrapper = exportArea.querySelector('.timetable-wrapper');
-        const isScrollable = wrapper.scrollWidth > wrapper.clientWidth;
-        const targetWidth = wrapper.scrollWidth;
+        const windowWidth = 1280;
+        const windowHeight = 720;
 
         // Capture the export area (title + table only)
         const canvas = await html2canvas(exportArea, {
@@ -434,16 +432,52 @@ async function downloadAsPdf() {
             scale: 2,
             useCORS: true,
             logging: false,
-            windowWidth: isScrollable ? targetWidth + 32 : undefined,
+            windowWidth: windowWidth,
+            windowHeight: windowHeight,
             onclone: (clonedDoc) => {
                 const clonedExportArea = clonedDoc.getElementById('timetable-export');
-                if (clonedExportArea && isScrollable) {
+                if (clonedExportArea) {
+                    clonedExportArea.style.width = windowWidth + 'px';
+                    clonedExportArea.style.height = windowHeight + 'px';
+                    clonedExportArea.style.display = 'flex';
+                    clonedExportArea.style.flexDirection = 'column';
+                    clonedExportArea.style.padding = '32px';
+                    clonedExportArea.style.boxSizing = 'border-box';
+                    clonedExportArea.style.margin = '0';
+
+                    const clonedTitle = clonedExportArea.querySelector('.section-title');
+                    if (clonedTitle) {
+                        clonedTitle.style.flexShrink = '0';
+                        clonedTitle.style.marginBottom = '24px';
+                        clonedTitle.style.fontSize = '2rem';
+                    }
+
                     const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
                     if (clonedWrapper) {
-                        clonedWrapper.style.overflow = 'visible';
-                        clonedWrapper.style.width = targetWidth + 'px';
+                        clonedWrapper.style.flex = '1';
+                        clonedWrapper.style.width = '100%';
+                        clonedWrapper.style.minHeight = '0';
+                        clonedWrapper.style.overflow = 'hidden';
                     }
-                    clonedExportArea.style.width = (targetWidth + 32) + 'px';
+
+                    const clonedTable = clonedExportArea.querySelector('.timetable');
+                    if (clonedTable) {
+                        clonedTable.style.width = '100%';
+                        clonedTable.style.height = '100%';
+
+                        // Optimize font sizes for 1280x720 desktop export
+                        clonedTable.querySelectorAll('th').forEach(th => {
+                            th.style.fontSize = '0.9rem';
+                            th.style.height = '60px';
+                        });
+                        clonedTable.querySelectorAll('th .time-slot').forEach(el => el.style.fontSize = '0.75rem');
+                        clonedTable.querySelectorAll('.course-name').forEach(el => el.style.fontSize = '0.9rem');
+                        clonedTable.querySelectorAll('.course-code').forEach(el => el.style.fontSize = '0.8rem');
+                        clonedTable.querySelectorAll('.course-location').forEach(el => el.style.fontSize = '0.75rem');
+                        clonedTable.querySelectorAll('.course-lecturer').forEach(el => el.style.fontSize = '0.75rem');
+                        clonedTable.querySelectorAll('.day-cell').forEach(el => el.style.fontSize = '0.9rem');
+                        clonedTable.querySelectorAll('.break-content span').forEach(el => el.style.fontSize = '1.3rem');
+                    }
                 }
             }
         });
@@ -452,48 +486,15 @@ async function downloadAsPdf() {
             throw new Error('Failed to generate rendering canvas.');
         }
 
-        // Ensure 16:9 aspect ratio while keeping ALL content visible
-        const targetRatio = 16 / 9;
-        const currentRatio = canvas.width / canvas.height;
-
-        let finalCanvas = canvas;
-
-        if (Math.abs(currentRatio - targetRatio) > 0.01) {
-            finalCanvas = document.createElement('canvas');
-            const ctx = finalCanvas.getContext('2d');
-
-            let newWidth, newHeight;
-
-            if (currentRatio > targetRatio) {
-                // Content is wider than 16:9 - use content width, expand height
-                newWidth = canvas.width;
-                newHeight = Math.round(newWidth / targetRatio);
-            } else {
-                // Content is taller than 16:9 - use content height, expand width
-                newHeight = canvas.height;
-                newWidth = Math.round(newHeight * targetRatio);
-            }
-
-            finalCanvas.width = newWidth;
-            finalCanvas.height = newHeight;
-
-            ctx.fillStyle = '#0f0f1a';
-            ctx.fillRect(0, 0, newWidth, newHeight);
-
-            const xOffset = Math.round((newWidth - canvas.width) / 2);
-            const yOffset = Math.round((newHeight - canvas.height) / 2);
-            ctx.drawImage(canvas, xOffset, yOffset);
-        }
-
-        // Calculate PDF dimensions (landscape 16:9)
-        const imgData = finalCanvas.toDataURL('image/png');
-        const pdfWidth = finalCanvas.width;
-        const pdfHeight = finalCanvas.height;
+        // Calculate PDF dimensions
+        const imgData = canvas.toDataURL('image/png');
+        const pdfWidth = canvas.width;
+        const pdfHeight = canvas.height;
 
         // Use jsPDF
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF({
-            orientation: 'landscape',
+            orientation: pdfWidth > pdfHeight ? 'landscape' : 'portrait',
             unit: 'px',
             format: [pdfWidth / 2, pdfHeight / 2]
         });
