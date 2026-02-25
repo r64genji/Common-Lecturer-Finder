@@ -73,21 +73,47 @@ def parse_all_timetables(timetables_dir: str = None) -> dict:
     Returns dict mapping section number to list of courses.
     Example: {1: [{'course_name': 'CALCULUS', 'lecturer_name': 'MR ...'}], ...}
     """
+    import json
+    
     if timetables_dir is None:
         # Default to 'timetables' folder in the same directory as this script
         timetables_dir = Path(__file__).parent / 'timetables'
     else:
         timetables_dir = Path(timetables_dir)
     
+    cache_file = timetables_dir / 'parsed_timetables.json'
+    pdf_files = list(timetables_dir.glob('sec*.pdf'))
+    expected_sections = set(get_section_number(p.name) for p in pdf_files if get_section_number(p.name) > 0)
+    
+    # Try to load from cache
+    if cache_file.exists():
+        try:
+            with open(cache_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            
+            cache_sections = set(int(k) for k in data.keys())
+            if cache_sections == expected_sections:
+                return {int(k): v for k, v in data.items()}
+        except Exception as e:
+            print(f"Cache load failed: {e}")
+
     all_sections = {}
     
-    for pdf_file in sorted(timetables_dir.glob('sec*.pdf')):
+    for pdf_file in sorted(pdf_files):
         section_num = get_section_number(pdf_file.name)
         if section_num > 0:
             courses = extract_courses_from_pdf(str(pdf_file))
             all_sections[section_num] = courses
             print(f"Parsed section {section_num}: {len(courses)} courses found")
     
+    # Save to cache
+    try:
+        with open(cache_file, 'w', encoding='utf-8') as f:
+            json.dump(all_sections, f, indent=2)
+            print("Successfully updated timetable cache")
+    except Exception as e:
+        print(f"Failed to write cache: {e}")
+        
     return all_sections
 
 

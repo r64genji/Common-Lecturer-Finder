@@ -1,0 +1,794 @@
+{
+  "1": [
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MR NORAFINDY BIN NORDIN"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MR. MUHAMMAD ILHAM BIN AHMAD ZAINI"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MR. MUHAMMAD ILHAM BIN AHMAD ZAINI"
+    },
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MRS NADZIRAH HUSNA BINTI MOHD TAIB"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MR SABRUN JAMIL BIN SAKIP"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MR. MUHAMMAD SYAFIQ BIN HAZLAN"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MR AZHAN ZULFADHLI BIN HANDERI"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MR. NIK ABDUL HADI BIN NOOR NASRAN"
+    }
+  ],
+  "10": [
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MR MOHD AMIRUL MUKMININ BIN LATIRIN"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MISS HUMAIRA BINTI HAIRUDIN"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MISS NUR AQILAH NORAZMI"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "DR. NOR AZIRAN BINTI AWANG"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS. NURUL SYUHADA BINTI SAMSUDIN"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MR MOHAMAD AIMAN BIN RADZUAN"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MISS WAN 'ATIKAH BINTI WAN IBRISAM FIKRY"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "DR SITI AISYAH ABDUL WAHAB"
+    }
+  ],
+  "11": [
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MR MUHAMMAD TAUFIQ BIN DZULKIFLI"
+    },
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MRS. SITI MARYAM BINTI IZAN"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MRS LINA FATINI BINTI AZMI"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MR. MUHAMMAD ILHAM BIN AHMAD ZAINI"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MR MOHD AMIRUL MUKMININ BIN LATIRIN"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MISS ASWANI IBRAHIM"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MRS. NURUL SYUHADA BINTI SAMSUDIN"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS. FARAH HAMIZAH BINTI MUHD ZAIMI"
+    }
+  ],
+  "12": [
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MRS. SITI MARYAM BINTI IZAN"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS NURUL DURATULAIN BINTI RAMLAN"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MRS LINA FATINI BINTI AZMI"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MR. NIK ABDUL HADI BIN NOOR NASRAN"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MRS ROHAJAR NOR BINTI ABDUL HAMID"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "DR SITI AISYAH ABDUL WAHAB"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "DR. NORZAFNEZA BINTI MOHD ARRIFFIN"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS. FARAH HAMIZAH BINTI MUHD ZAIMI"
+    }
+  ],
+  "13": [
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "DR SITI AISYAH ABDUL WAHAB"
+    },
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MISS NUR AQILAH NORAZMI"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "DR. NORZAFNEZA BINTI MOHD ARRIFFIN"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MISS NURNADIRAH SHAHIRA BINTI NAZRI"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS. NURELYA BINTI RAMLI"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MISS AZWANIZA BINTI POHARAN @ BUNARI"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MRS NORDALELA BINTI DANIL"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MRS NOOR SYUHAIDA BINTI IBRAHIM"
+    }
+  ],
+  "14": [
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MISS NUR AQILAH NORAZMI"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MRS NORDALELA BINTI DANIL"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MRS NOOR SYUHAIDA BINTI IBRAHIM"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "DR SITI AISYAH ABDUL WAHAB"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MISS NUR AQILAH NORAZMI"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "DR. NOR AZIRAN BINTI AWANG"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MISS NUR HAZIRAH BINTI MOHD BAHKRI"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS NUR LIYANA BINTI ZAKARIA"
+    }
+  ],
+  "15": [
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MRS. NUR FARALIYANA BINTI JAPRI"
+    },
+    {
+      "course_name": "BIOLOGY PRACTICAL II",
+      "lecturer_name": "MISS NUR KAMILAH BINTI MOHD NORDIN"
+    },
+    {
+      "course_name": "BIOLOGY II",
+      "lecturer_name": "MISS NUR KAMILAH BINTI MOHD NORDIN"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MRS. ASRAFUL SYIFAA' BINTI AHMAD"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MRS. NURUL SYUHADA BINTI SAMSUDIN"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MRS. SITI MARYAM BINTI IZAN"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS SITI ZHAFIRAH BINTI ZAINAL"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS. FARAH HAMIZAH BINTI MUHD ZAIMI"
+    }
+  ],
+  "16": [
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MRS. NUR FARALIYANA BINTI JAPRI"
+    },
+    {
+      "course_name": "BIOLOGY II",
+      "lecturer_name": "MISS NUR KAMILAH BINTI MOHD NORDIN"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MRS. ASRAFUL SYIFAA' BINTI AHMAD"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MR. NIK ABDUL HADI BIN NOOR NASRAN"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MRS. SITI MARYAM BINTI IZAN"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MISS NURNADIRAH SHAHIRA BINTI NAZRI"
+    },
+    {
+      "course_name": "BIOLOGY PRACTICAL II",
+      "lecturer_name": "MISS NUR KAMILAH BINTI MOHD NORDIN"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS. NURELYA BINTI RAMLI"
+    }
+  ],
+  "17": [
+    {
+      "course_name": "INTRODUCTION TO ACCOUNTING",
+      "lecturer_name": "MRS FARAH FARHANAH BINTI MOHD ROZADI"
+    },
+    {
+      "course_name": "MEDIA AND COMMUNICATION",
+      "lecturer_name": "MR AZHAN ZULFADHLI BIN HANDERI"
+    },
+    {
+      "course_name": "INTRODUCTION TO LAW",
+      "lecturer_name": "MRS. ZAHIDAH BINTI ZAKARIA"
+    },
+    {
+      "course_name": "PEOPLE AND ORGANISATION",
+      "lecturer_name": "MR MOHD AZRI BIN JOHAN"
+    },
+    {
+      "course_name": "BUSINESS MANAGEMENT",
+      "lecturer_name": "MR MOHD KAMAL BIN YUSOFF"
+    },
+    {
+      "course_name": "STATISTICS FOR SOCIAL SCIENCE",
+      "lecturer_name": "MRS 'AAISHAH RADZIAH BINTI JAMALUDIN"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS. FARAH HAMIZAH BINTI MUHD ZAIMI"
+    }
+  ],
+  "18": [
+    {
+      "course_name": "STATISTICS FOR SOCIAL SCIENCE",
+      "lecturer_name": "MISS RABIATULADAWIYAH BINTI ISMAIL"
+    },
+    {
+      "course_name": "BUSINESS MANAGEMENT",
+      "lecturer_name": "MR MOHD KAMAL BIN YUSOFF"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MISS NURNADIRAH SHAHIRA BINTI NAZRI"
+    },
+    {
+      "course_name": "PEOPLE AND ORGANISATION",
+      "lecturer_name": "MR MOHD AZRI BIN JOHAN"
+    },
+    {
+      "course_name": "INTRODUCTION TO LAW",
+      "lecturer_name": "MRS. LYDIANA BINTI MANSOR"
+    },
+    {
+      "course_name": "MEDIA AND COMMUNICATION",
+      "lecturer_name": "MR AZHAN ZULFADHLI BIN HANDERI"
+    },
+    {
+      "course_name": "INTRODUCTION TO ACCOUNTING",
+      "lecturer_name": "MRS FARAH FARHANAH BINTI MOHD ROZADI"
+    }
+  ],
+  "19": [
+    {
+      "course_name": "INTRODUCTION TO ACCOUNTING",
+      "lecturer_name": "MISS FATINAH NAJIHAH BINTI MOHD ROZADI"
+    },
+    {
+      "course_name": "MEDIA AND COMMUNICATION",
+      "lecturer_name": "MRS. FARAH HAMIZAH BINTI MUHD ZAIMI"
+    },
+    {
+      "course_name": "INTRODUCTION TO LAW",
+      "lecturer_name": "MRS. LYDIANA BINTI MANSOR"
+    },
+    {
+      "course_name": "PEOPLE AND ORGANISATION",
+      "lecturer_name": "MR. AHMAD RUSYDI BIN RAZAK"
+    },
+    {
+      "course_name": "BUSINESS MANAGEMENT",
+      "lecturer_name": "DR. NORAZLINA BINTI MOHD YASIN"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS SARAHLINA BINTI ADAM RAFIK THIAGARAJAH"
+    },
+    {
+      "course_name": "STATISTICS FOR SOCIAL SCIENCE",
+      "lecturer_name": "MISS RABIATULADAWIYAH BINTI ISMAIL"
+    }
+  ],
+  "2": [
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MRS NATASHA BINTI HASHIM"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS 'AAISHAH RADZIAH BINTI JAMALUDIN"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MISS NOR NAIMAH BINTI SHAARI"
+    },
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MISS AINA MARDZIAH BINTI AHMAD RIFA'I"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MR. MUHAMMAD SYAFIQ BIN HAZLAN"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MRS SITI ZHAFIRAH BINTI ZAINAL"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MISS NUR 'AIN NAJIHAH BINTI MAAROF"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS SARAHLINA BINTI ADAM RAFIK THIAGARAJAH"
+    }
+  ],
+  "20": [
+    {
+      "course_name": "INTRODUCTION TO ACCOUNTING",
+      "lecturer_name": "MISS FATINAH NAJIHAH BINTI MOHD ROZADI"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MISS WAN 'ATIKAH BINTI WAN IBRISAM FIKRY"
+    },
+    {
+      "course_name": "MEDIA AND COMMUNICATION",
+      "lecturer_name": "MRS NUR LIYANA BINTI ZAKARIA"
+    },
+    {
+      "course_name": "INTRODUCTION TO LAW",
+      "lecturer_name": "MRS. LYDIANA BINTI MANSOR"
+    },
+    {
+      "course_name": "PEOPLE AND ORGANISATION",
+      "lecturer_name": "MR. AHMAD RUSYDI BIN RAZAK"
+    },
+    {
+      "course_name": "STATISTICS FOR SOCIAL SCIENCE",
+      "lecturer_name": "MISS AZWANIZA BINTI POHARAN @ BUNARI"
+    },
+    {
+      "course_name": "BUSINESS MANAGEMENT",
+      "lecturer_name": "MRS. SHAMIRA BINTI KAMARUDDIN"
+    }
+  ],
+  "21": [
+    {
+      "course_name": "INTRODUCTION TO LAW",
+      "lecturer_name": "MRS. NOR HAMNI BINTI MAHMOOD SABRY"
+    },
+    {
+      "course_name": "PEOPLE AND ORGANISATION",
+      "lecturer_name": "MRS. NORUL HUDA BINTI MAT RASHID"
+    },
+    {
+      "course_name": "STATISTICS FOR SOCIAL SCIENCE",
+      "lecturer_name": "MISS ASWANI IBRAHIM"
+    },
+    {
+      "course_name": "MEDIA AND COMMUNICATION",
+      "lecturer_name": "MISS NURNADIRAH SHAHIRA BINTI NAZRI"
+    },
+    {
+      "course_name": "INTRODUCTION TO ACCOUNTING",
+      "lecturer_name": "MISS FATINAH NAJIHAH BINTI MOHD ROZADI"
+    },
+    {
+      "course_name": "BUSINESS MANAGEMENT",
+      "lecturer_name": "MRS. SHAMIRA BINTI KAMARUDDIN"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS. FARAH HAMIZAH BINTI MUHD ZAIMI"
+    }
+  ],
+  "22": [
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS SARAHLINA BINTI ADAM RAFIK THIAGARAJAH"
+    },
+    {
+      "course_name": "INTRODUCTION TO LAW",
+      "lecturer_name": "MRS. NOR HAMNI BINTI MAHMOOD SABRY"
+    },
+    {
+      "course_name": "PEOPLE AND ORGANISATION",
+      "lecturer_name": "MRS. NORUL HUDA BINTI MAT RASHID"
+    },
+    {
+      "course_name": "BUSINESS MANAGEMENT",
+      "lecturer_name": "MRS. SHAMIRA BINTI KAMARUDDIN"
+    },
+    {
+      "course_name": "STATISTICS FOR SOCIAL SCIENCE",
+      "lecturer_name": "MISS ASWANI IBRAHIM"
+    },
+    {
+      "course_name": "MEDIA AND COMMUNICATION",
+      "lecturer_name": "MISS NURNADIRAH SHAHIRA BINTI NAZRI"
+    },
+    {
+      "course_name": "INTRODUCTION TO ACCOUNTING",
+      "lecturer_name": "MISS SITI NORFAIZAH BINTI MAHFOL"
+    }
+  ],
+  "23": [
+    {
+      "course_name": "PHYSICS PRACTICAL I",
+      "lecturer_name": "MISS NOR NAIMAH BINTI SHAARI"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "DR. NUR FARIZA BINTI IZAN"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MISS NUR HAZIRAH BINTI MOHD BAHKRI"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MISS NOR NAIMAH BINTI SHAARI"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MR MOHD SYAFIQ BIN ELIAS"
+    },
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MISS NURHAZLIN BINTI AZMAN"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MRS NURUL IZZATY BINTI MOHD. YUNUS"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MR AZHAN ZULFADHLI BIN HANDERI"
+    }
+  ],
+  "24": [
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MR MOHD SYAFIQ BIN ELIAS"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MRS NOOR SYUHAIDA BINTI IBRAHIM"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MRS NADZIRAH HUSNA BINTI MOHD TAIB"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS NUR LIYANA BINTI ZAKARIA"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MRS NOOR SYUHAIDA BINTI IBRAHIM"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MISS NUR HAZIRAH BINTI MOHD BAHKRI"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MISS AZWANIZA BINTI POHARAN @ BUNARI"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "DR. NUR FARIZA BINTI IZAN"
+    }
+  ],
+  "3": [
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS SARAHLINA BINTI ADAM RAFIK THIAGARAJAH"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "DR. NUR FARIZA BINTI IZAN"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS SITI ZHAFIRAH BINTI ZAINAL"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MISS NURSYAZWANI BINTI MOHAMAD SUKRI"
+    },
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MR MOHD SYAFIQ BIN ELIAS"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MISS NUR 'AIN NAJIHAH BINTI MAAROF"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MRS NURUL DURATULAIN BINTI RAMLAN"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MISS NURHAZLIN BINTI AZMAN"
+    }
+  ],
+  "4": [
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS NUR LIYANA BINTI ZAKARIA"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MR NORAFINDY BIN NORDIN"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MR SABRUN JAMIL BIN SAKIP"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS 'AAISHAH RADZIAH BINTI JAMALUDIN"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MISS NURSYAZWANI BINTI MOHAMAD SUKRI"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MISS NURSYAZWANI BINTI MOHAMAD SUKRI"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MISS NURHAZLIN BINTI AZMAN"
+    },
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MR MOHD SYAFIQ BIN ELIAS"
+    }
+  ],
+  "5": [
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS SARAHLINA BINTI ADAM RAFIK THIAGARAJAH"
+    },
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MR. MUHAMMAD SYAFIQ BIN HAZLAN"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MRS. SHARIFAH ZAHRA BINTI SYED AB RAHMAN"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS NURUL DURATULAIN BINTI RAMLAN"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MISS NURSYAZWANI BINTI MOHAMAD SUKRI"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MISS NUR HAZIRAH BINTI MOHD BAHKRI"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MRS. ASRAFUL SYIFAA' BINTI AHMAD"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MR MOHD AMIRUL MUKMININ BIN LATIRIN"
+    }
+  ],
+  "6": [
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MR. MUHAMMAD SYAFIQ BIN HAZLAN"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MRS. SHARIFAH ZAHRA BINTI SYED AB RAHMAN"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MRS. NUR FARAHIM BINTI ARZMI"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MRS. SHARIFAH ZAHRA BINTI SYED AB RAHMAN"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS. NUR FARAHIM BINTI ARZMI"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MR IRFAN MUBIN BIN SHUKRI"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MR. MUHAMMAD SYAFIQ BIN HAZLAN"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MISS WAN 'ATIKAH BINTI WAN IBRISAM FIKRY"
+    }
+  ],
+  "7": [
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MRS. NUR FARAHIM BINTI ARZMI"
+    },
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "DR. NORZAFNEZA BINTI MOHD ARRIFFIN"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "DR SITI AISYAH ABDUL WAHAB"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MRS. SHARIFAH ZAHRA BINTI SYED AB RAHMAN"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MR MOHD SYAFIQ BIN ELIAS"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MRS NOOR HAYATI BINTI MOHD ZAIN"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS. NURELYA BINTI RAMLI"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MRS SARAHLINA BINTI ADAM RAFIK THIAGARAJAH"
+    }
+  ],
+  "8": [
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "DR. NORZAFNEZA BINTI MOHD ARRIFFIN"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MISS NOR NAIMAH BINTI SHAARI"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "MRS. NUR AISYAH BINTI OMAR"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MRS. NUR AISYAH BINTI OMAR"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MRS NOOR HAYATI BINTI MOHD ZAIN"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MISS NURSYAZWANI BINTI MOHAMAD SUKRI"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MRS NADZIRAH HUSNA BINTI MOHD TAIB"
+    },
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MISS WAN 'ATIKAH BINTI WAN IBRISAM FIKRY"
+    }
+  ],
+  "9": [
+    {
+      "course_name": "ACADEMIC READING AND WRITING SKILLS",
+      "lecturer_name": "MISS NURNADIRAH SHAHIRA BINTI NAZRI"
+    },
+    {
+      "course_name": "FUNDAMENTALS OF PROGRAMMING",
+      "lecturer_name": "MISS HUMAIRA BINTI HAIRUDIN"
+    },
+    {
+      "course_name": "CALCULUS",
+      "lecturer_name": "MRS. NUR AISYAH BINTI OMAR"
+    },
+    {
+      "course_name": "STATISTICS AND PROBABILITY",
+      "lecturer_name": "DR. NOR AZIRAN BINTI AWANG"
+    },
+    {
+      "course_name": "PHYSICS PRACTICAL II",
+      "lecturer_name": "MR. MUHAMMAD ILHAM BIN AHMAD ZAINI"
+    },
+    {
+      "course_name": "PHYSICS II",
+      "lecturer_name": "MRS NOOR SUHAIDA BT GALIP"
+    },
+    {
+      "course_name": "CHEMISTRY II",
+      "lecturer_name": "MR KHAIRUL RIJAL BIN RAZALI"
+    },
+    {
+      "course_name": "CHEMISTRY PRACTICAL II",
+      "lecturer_name": "MR MOHD AMIRUL MUKMININ BIN LATIRIN"
+    }
+  ]
+}
