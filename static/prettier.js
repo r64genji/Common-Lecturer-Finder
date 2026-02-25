@@ -332,8 +332,8 @@ async function downloadAsImage() {
         downloadImageBtn.disabled = true;
         downloadImageBtn.textContent = 'Generating...';
 
-        const windowWidth = 1280;
-        const windowHeight = 720;
+        const windowWidth = 1920;
+        const windowHeight = 1080;
 
         // Capture the export area (title + table only)
         const canvas = await html2canvas(exportArea, {
@@ -350,15 +350,15 @@ async function downloadAsImage() {
                     clonedExportArea.style.height = windowHeight + 'px';
                     clonedExportArea.style.display = 'flex';
                     clonedExportArea.style.flexDirection = 'column';
-                    clonedExportArea.style.padding = '32px';
+                    clonedExportArea.style.padding = '48px';
                     clonedExportArea.style.boxSizing = 'border-box';
                     clonedExportArea.style.margin = '0';
 
                     const clonedTitle = clonedExportArea.querySelector('.section-title');
                     if (clonedTitle) {
                         clonedTitle.style.flexShrink = '0';
-                        clonedTitle.style.marginBottom = '24px';
-                        clonedTitle.style.fontSize = '2rem';
+                        clonedTitle.style.marginBottom = '36px';
+                        clonedTitle.style.fontSize = '3rem';
                     }
 
                     const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
@@ -374,18 +374,18 @@ async function downloadAsImage() {
                         clonedTable.style.width = '100%';
                         clonedTable.style.height = '100%';
 
-                        // Optimize font sizes for 1280x720 desktop export
+                        // Optimize font sizes for 1920x1080 desktop export
                         clonedTable.querySelectorAll('th').forEach(th => {
-                            th.style.fontSize = '0.9rem';
-                            th.style.height = '60px';
+                            th.style.fontSize = '1.35rem';
+                            th.style.height = '90px';
                         });
-                        clonedTable.querySelectorAll('th .time-slot').forEach(el => el.style.fontSize = '0.75rem');
-                        clonedTable.querySelectorAll('.course-name').forEach(el => el.style.fontSize = '0.9rem');
-                        clonedTable.querySelectorAll('.course-code').forEach(el => el.style.fontSize = '0.8rem');
-                        clonedTable.querySelectorAll('.course-location').forEach(el => el.style.fontSize = '0.75rem');
-                        clonedTable.querySelectorAll('.course-lecturer').forEach(el => el.style.fontSize = '0.75rem');
-                        clonedTable.querySelectorAll('.day-cell').forEach(el => el.style.fontSize = '0.9rem');
-                        clonedTable.querySelectorAll('.break-content span').forEach(el => el.style.fontSize = '1.3rem');
+                        clonedTable.querySelectorAll('th .time-slot').forEach(el => el.style.fontSize = '1.1rem');
+                        clonedTable.querySelectorAll('.course-name').forEach(el => el.style.fontSize = '1.35rem');
+                        clonedTable.querySelectorAll('.course-code').forEach(el => el.style.fontSize = '1.2rem');
+                        clonedTable.querySelectorAll('.course-location').forEach(el => el.style.fontSize = '1.1rem');
+                        clonedTable.querySelectorAll('.course-lecturer').forEach(el => el.style.fontSize = '1.1rem');
+                        clonedTable.querySelectorAll('.day-cell').forEach(el => el.style.fontSize = '1.35rem');
+                        clonedTable.querySelectorAll('.break-content span').forEach(el => el.style.fontSize = '1.95rem');
                     }
                 }
             }
@@ -423,8 +423,8 @@ async function downloadAsPdf() {
         downloadPdfBtn.disabled = true;
         downloadPdfBtn.textContent = 'Generating...';
 
-        const windowWidth = 1280;
-        const windowHeight = 720;
+        const windowWidth = 1920;
+        const windowHeight = 1080;
 
         // Capture the export area (title + table only)
         const canvas = await html2canvas(exportArea, {
@@ -441,15 +441,15 @@ async function downloadAsPdf() {
                     clonedExportArea.style.height = windowHeight + 'px';
                     clonedExportArea.style.display = 'flex';
                     clonedExportArea.style.flexDirection = 'column';
-                    clonedExportArea.style.padding = '32px';
+                    clonedExportArea.style.padding = '48px';
                     clonedExportArea.style.boxSizing = 'border-box';
                     clonedExportArea.style.margin = '0';
 
                     const clonedTitle = clonedExportArea.querySelector('.section-title');
                     if (clonedTitle) {
                         clonedTitle.style.flexShrink = '0';
-                        clonedTitle.style.marginBottom = '24px';
-                        clonedTitle.style.fontSize = '2rem';
+                        clonedTitle.style.marginBottom = '36px';
+                        clonedTitle.style.fontSize = '3rem';
                     }
 
                     const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
@@ -465,18 +465,18 @@ async function downloadAsPdf() {
                         clonedTable.style.width = '100%';
                         clonedTable.style.height = '100%';
 
-                        // Optimize font sizes for 1280x720 desktop export
+                        // Optimize font sizes for 1920x1080 desktop export
                         clonedTable.querySelectorAll('th').forEach(th => {
-                            th.style.fontSize = '0.9rem';
-                            th.style.height = '60px';
+                            th.style.fontSize = '1.35rem';
+                            th.style.height = '90px';
                         });
-                        clonedTable.querySelectorAll('th .time-slot').forEach(el => el.style.fontSize = '0.75rem');
-                        clonedTable.querySelectorAll('.course-name').forEach(el => el.style.fontSize = '0.9rem');
-                        clonedTable.querySelectorAll('.course-code').forEach(el => el.style.fontSize = '0.8rem');
-                        clonedTable.querySelectorAll('.course-location').forEach(el => el.style.fontSize = '0.75rem');
-                        clonedTable.querySelectorAll('.course-lecturer').forEach(el => el.style.fontSize = '0.75rem');
-                        clonedTable.querySelectorAll('.day-cell').forEach(el => el.style.fontSize = '0.9rem');
-                        clonedTable.querySelectorAll('.break-content span').forEach(el => el.style.fontSize = '1.3rem');
+                        clonedTable.querySelectorAll('th .time-slot').forEach(el => el.style.fontSize = '1.1rem');
+                        clonedTable.querySelectorAll('.course-name').forEach(el => el.style.fontSize = '1.35rem');
+                        clonedTable.querySelectorAll('.course-code').forEach(el => el.style.fontSize = '1.2rem');
+                        clonedTable.querySelectorAll('.course-location').forEach(el => el.style.fontSize = '1.1rem');
+                        clonedTable.querySelectorAll('.course-lecturer').forEach(el => el.style.fontSize = '1.1rem');
+                        clonedTable.querySelectorAll('.day-cell').forEach(el => el.style.fontSize = '1.35rem');
+                        clonedTable.querySelectorAll('.break-content span').forEach(el => el.style.fontSize = '1.95rem');
                     }
                 }
             }
