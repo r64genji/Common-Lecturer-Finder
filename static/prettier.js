@@ -398,7 +398,7 @@ function createExportSnapshot(exportArea) {
         Math.floor((availableTableHeight - headerHeight) / tempBodyRows)
     );
     const tableHeight = headerHeight + (rowHeight * tempBodyRows);
-    const textScale = Math.max(0.9, Math.min(1.25, rowHeight / 125));
+    const textScale = Math.max(0.85, Math.min(1.05, rowHeight / 125));
 
     const clonedWrapper = snapshot.querySelector('.timetable-wrapper');
     if (clonedWrapper) {
@@ -452,34 +452,44 @@ function createExportSnapshot(exportArea) {
         });
         clonedTable.querySelectorAll('.course-cell').forEach(el => {
             el.style.height = '100%';
-            el.style.padding = '4px 6px';
+            el.style.padding = '6px 6px';
             el.style.gap = '2px';
             el.style.overflow = 'hidden';
             el.style.justifyContent = 'flex-start';
         });
         clonedTable.querySelectorAll('.course-name').forEach(el => {
-            el.style.fontSize = (1.0 * textScale).toFixed(2) + 'rem';
+            el.style.fontSize = (0.84 * textScale).toFixed(2) + 'rem';
             el.style.marginBottom = '2px';
-            el.style.lineHeight = '1.15';
-            el.style.maxHeight = '2.3em';
+            el.style.lineHeight = '1.2';
+            el.style.maxHeight = '3.6em';
+            el.style.whiteSpace = 'normal';
+            el.style.wordBreak = 'break-word';
+            el.style.overflowWrap = 'anywhere';
             el.style.overflow = 'hidden';
         });
         clonedTable.querySelectorAll('.course-code').forEach(el => {
-            el.style.fontSize = (0.85 * textScale).toFixed(2) + 'rem';
+            el.style.fontSize = (0.76 * textScale).toFixed(2) + 'rem';
             el.style.lineHeight = '1.15';
             el.style.maxHeight = '1.2em';
+            el.style.whiteSpace = 'nowrap';
             el.style.overflow = 'hidden';
         });
         clonedTable.querySelectorAll('.course-location').forEach(el => {
-            el.style.fontSize = (0.74 * textScale).toFixed(2) + 'rem';
-            el.style.lineHeight = '1.15';
-            el.style.maxHeight = '2.3em';
+            el.style.fontSize = (0.62 * textScale).toFixed(2) + 'rem';
+            el.style.lineHeight = '1.2';
+            el.style.maxHeight = '2.4em';
+            el.style.whiteSpace = 'normal';
+            el.style.wordBreak = 'break-word';
+            el.style.overflowWrap = 'anywhere';
             el.style.overflow = 'hidden';
         });
         clonedTable.querySelectorAll('.course-lecturer').forEach(el => {
-            el.style.fontSize = (0.74 * textScale).toFixed(2) + 'rem';
-            el.style.lineHeight = '1.15';
-            el.style.maxHeight = '2.3em';
+            el.style.fontSize = (0.62 * textScale).toFixed(2) + 'rem';
+            el.style.lineHeight = '1.2';
+            el.style.maxHeight = '2.4em';
+            el.style.whiteSpace = 'normal';
+            el.style.wordBreak = 'break-word';
+            el.style.overflowWrap = 'anywhere';
             el.style.overflow = 'hidden';
         });
         clonedTable.querySelectorAll('.day-cell').forEach(el => {
