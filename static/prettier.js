@@ -325,6 +325,30 @@ function setupDownloadListeners() {
     downloadPdfBtn.addEventListener('click', downloadAsPdf);
 }
 
+const EXPORT_TARGET_WIDTH = 1920;
+const EXPORT_TARGET_HEIGHT = 1080;
+const EXPORT_PADDING = 48;
+
+function getExportDimensions(exportArea) {
+    const tableElement = exportArea.querySelector('.timetable');
+    const wrapperElement = exportArea.querySelector('.timetable-wrapper');
+    const minInnerWidth = EXPORT_TARGET_WIDTH - (EXPORT_PADDING * 2);
+
+    const measuredTableWidth = tableElement
+        ? Math.ceil(Math.max(tableElement.scrollWidth, tableElement.offsetWidth))
+        : minInnerWidth;
+    const measuredWrapperWidth = wrapperElement
+        ? Math.ceil(Math.max(wrapperElement.scrollWidth, wrapperElement.offsetWidth))
+        : minInnerWidth;
+    const measuredHeight = Math.ceil(Math.max(exportArea.scrollHeight, exportArea.offsetHeight));
+
+    const innerWidth = Math.max(minInnerWidth, measuredTableWidth, measuredWrapperWidth);
+    const windowWidth = innerWidth + (EXPORT_PADDING * 2);
+    const windowHeight = Math.max(EXPORT_TARGET_HEIGHT, measuredHeight + (EXPORT_PADDING * 2));
+
+    return { windowWidth, windowHeight };
+}
+
 function getExportConfig(windowWidth, windowHeight) {
     return {
         backgroundColor: '#0f0f1a',
@@ -337,7 +361,12 @@ function getExportConfig(windowWidth, windowHeight) {
         windowHeight: windowHeight,
         onclone: (clonedDoc) => {
             // Force document width so that responsive CSS might trigger desktop mode
+            clonedDoc.documentElement.style.margin = '0';
+            clonedDoc.documentElement.style.padding = '0';
             clonedDoc.documentElement.style.width = windowWidth + 'px';
+            clonedDoc.documentElement.style.height = windowHeight + 'px';
+            clonedDoc.body.style.margin = '0';
+            clonedDoc.body.style.padding = '0';
             clonedDoc.body.style.width = windowWidth + 'px';
             clonedDoc.body.style.height = windowHeight + 'px';
 
@@ -347,7 +376,7 @@ function getExportConfig(windowWidth, windowHeight) {
                 clonedExportArea.style.height = windowHeight + 'px';
                 clonedExportArea.style.display = 'flex';
                 clonedExportArea.style.flexDirection = 'column';
-                clonedExportArea.style.padding = '48px';
+                clonedExportArea.style.padding = EXPORT_PADDING + 'px';
                 clonedExportArea.style.boxSizing = 'border-box';
                 clonedExportArea.style.margin = '0';
                 clonedExportArea.style.backgroundColor = '#0f0f1a';
@@ -357,13 +386,17 @@ function getExportConfig(windowWidth, windowHeight) {
                     clonedTitle.style.flexShrink = '0';
                     clonedTitle.style.marginBottom = '36px';
                     clonedTitle.style.fontSize = '3rem';
+                    clonedTitle.style.width = '100%';
                 }
 
                 const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
                 if (clonedWrapper) {
                     clonedWrapper.style.flex = '1';
                     clonedWrapper.style.width = '100%';
+                    clonedWrapper.style.maxWidth = 'none';
                     clonedWrapper.style.minHeight = '0';
+                    clonedWrapper.style.overflowX = 'visible';
+                    clonedWrapper.style.overflowY = 'visible';
                     clonedWrapper.style.overflow = 'visible';
                 }
 
@@ -371,7 +404,8 @@ function getExportConfig(windowWidth, windowHeight) {
                 if (clonedTable) {
                     clonedTable.style.width = '100%';
                     clonedTable.style.height = '100%';
-                    clonedTable.style.minWidth = 'auto'; // Reset mobile "min-width: 100%"
+                    clonedTable.style.maxWidth = 'none';
+                    clonedTable.style.minWidth = '0';
                     clonedTable.style.tableLayout = 'fixed'; // Ensure equal columns
 
                     // Optimize font sizes for 1920x1080 desktop export
@@ -411,8 +445,7 @@ async function downloadAsImage() {
         downloadImageBtn.disabled = true;
         downloadImageBtn.textContent = 'Generating...';
 
-        const windowWidth = 1920;
-        const windowHeight = 1080;
+        const { windowWidth, windowHeight } = getExportDimensions(exportArea);
 
         // Capture the export area (title + table only)
         const canvas = await html2canvas(exportArea, getExportConfig(windowWidth, windowHeight));
@@ -449,8 +482,7 @@ async function downloadAsPdf() {
         downloadPdfBtn.disabled = true;
         downloadPdfBtn.textContent = 'Generating...';
 
-        const windowWidth = 1920;
-        const windowHeight = 1080;
+        const { windowWidth, windowHeight } = getExportDimensions(exportArea);
 
         // Capture the export area (title + table only)
         const canvas = await html2canvas(exportArea, getExportConfig(windowWidth, windowHeight));

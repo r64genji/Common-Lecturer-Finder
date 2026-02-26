@@ -289,6 +289,116 @@ function setupDownloadListeners() {
     downloadPdfBtn.addEventListener('click', downloadAsPdf);
 }
 
+const EXPORT_TARGET_WIDTH = 1920;
+const EXPORT_TARGET_HEIGHT = 1080;
+const EXPORT_PADDING = 48;
+
+function getExportDimensions(exportArea) {
+    const tableElement = exportArea.querySelector('.timetable');
+    const wrapperElement = exportArea.querySelector('.timetable-wrapper');
+    const minInnerWidth = EXPORT_TARGET_WIDTH - (EXPORT_PADDING * 2);
+
+    const measuredTableWidth = tableElement
+        ? Math.ceil(Math.max(tableElement.scrollWidth, tableElement.offsetWidth))
+        : minInnerWidth;
+    const measuredWrapperWidth = wrapperElement
+        ? Math.ceil(Math.max(wrapperElement.scrollWidth, wrapperElement.offsetWidth))
+        : minInnerWidth;
+    const measuredHeight = Math.ceil(Math.max(exportArea.scrollHeight, exportArea.offsetHeight));
+
+    const innerWidth = Math.max(minInnerWidth, measuredTableWidth, measuredWrapperWidth);
+    const windowWidth = innerWidth + (EXPORT_PADDING * 2);
+    const windowHeight = Math.max(EXPORT_TARGET_HEIGHT, measuredHeight + (EXPORT_PADDING * 2));
+
+    return { windowWidth, windowHeight };
+}
+
+function getExportConfig(windowWidth, windowHeight) {
+    return {
+        backgroundColor: '#0f0f1a',
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        width: windowWidth,
+        height: windowHeight,
+        windowWidth: windowWidth,
+        windowHeight: windowHeight,
+        onclone: (clonedDoc) => {
+            clonedDoc.documentElement.style.margin = '0';
+            clonedDoc.documentElement.style.padding = '0';
+            clonedDoc.documentElement.style.width = windowWidth + 'px';
+            clonedDoc.documentElement.style.height = windowHeight + 'px';
+            clonedDoc.body.style.margin = '0';
+            clonedDoc.body.style.padding = '0';
+            clonedDoc.body.style.width = windowWidth + 'px';
+            clonedDoc.body.style.height = windowHeight + 'px';
+
+            const clonedExportArea = clonedDoc.getElementById('timetable-export');
+            if (clonedExportArea) {
+                clonedExportArea.style.width = windowWidth + 'px';
+                clonedExportArea.style.height = windowHeight + 'px';
+                clonedExportArea.style.display = 'flex';
+                clonedExportArea.style.flexDirection = 'column';
+                clonedExportArea.style.padding = EXPORT_PADDING + 'px';
+                clonedExportArea.style.boxSizing = 'border-box';
+                clonedExportArea.style.margin = '0';
+                clonedExportArea.style.backgroundColor = '#0f0f1a';
+
+                const clonedTitle = clonedExportArea.querySelector('.section-title');
+                if (clonedTitle) {
+                    clonedTitle.style.flexShrink = '0';
+                    clonedTitle.style.marginBottom = '36px';
+                    clonedTitle.style.fontSize = '3rem';
+                    clonedTitle.style.width = '100%';
+                }
+
+                const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
+                if (clonedWrapper) {
+                    clonedWrapper.style.flex = '1';
+                    clonedWrapper.style.width = '100%';
+                    clonedWrapper.style.maxWidth = 'none';
+                    clonedWrapper.style.minHeight = '0';
+                    clonedWrapper.style.overflowX = 'visible';
+                    clonedWrapper.style.overflowY = 'visible';
+                    clonedWrapper.style.overflow = 'visible';
+                }
+
+                const clonedTable = clonedExportArea.querySelector('.timetable');
+                if (clonedTable) {
+                    clonedTable.style.width = '100%';
+                    clonedTable.style.height = '100%';
+                    clonedTable.style.maxWidth = 'none';
+                    clonedTable.style.minWidth = '0';
+                    clonedTable.style.tableLayout = 'fixed';
+
+                    clonedTable.querySelectorAll('th').forEach(th => {
+                        th.style.fontSize = '1.35rem';
+                        th.style.height = '90px';
+                        th.style.minWidth = '0';
+                    });
+                    clonedTable.querySelectorAll('td').forEach(td => {
+                        td.style.minWidth = '0';
+                    });
+
+                    clonedTable.querySelectorAll('.day-header, .day-cell').forEach(el => {
+                        el.style.width = '80px';
+                        el.style.minWidth = '80px';
+                        el.style.maxWidth = '80px';
+                    });
+
+                    clonedTable.querySelectorAll('th .time-slot').forEach(el => el.style.fontSize = '1.1rem');
+                    clonedTable.querySelectorAll('.course-name').forEach(el => el.style.fontSize = '1.35rem');
+                    clonedTable.querySelectorAll('.course-code').forEach(el => el.style.fontSize = '1.2rem');
+                    clonedTable.querySelectorAll('.course-location').forEach(el => el.style.fontSize = '1.1rem');
+                    clonedTable.querySelectorAll('.course-lecturer').forEach(el => el.style.fontSize = '1.1rem');
+                    clonedTable.querySelectorAll('.day-cell').forEach(el => el.style.fontSize = '1.35rem');
+                    clonedTable.querySelectorAll('.break-content span').forEach(el => el.style.fontSize = '1.95rem');
+                }
+            }
+        }
+    };
+}
+
 async function downloadAsImage() {
     const exportArea = document.getElementById('timetable-export');
 
@@ -296,54 +406,16 @@ async function downloadAsImage() {
         downloadImageBtn.disabled = true;
         downloadImageBtn.textContent = 'Generating...';
 
-        // Capture the export area (title + table only)
-        const canvas = await html2canvas(exportArea, {
-            backgroundColor: '#0f0f1a',
-            scale: 2,
-            useCORS: true,
-            logging: false
-        });
+        const { windowWidth, windowHeight } = getExportDimensions(exportArea);
+        const canvas = await html2canvas(exportArea, getExportConfig(windowWidth, windowHeight));
 
-        // Ensure 16:9 aspect ratio while keeping ALL content visible
-        const targetRatio = 16 / 9;
-        const currentRatio = canvas.width / canvas.height;
-
-        let finalCanvas = canvas;
-
-        if (Math.abs(currentRatio - targetRatio) > 0.01) {
-            // Create a new canvas with exact 16:9 ratio
-            finalCanvas = document.createElement('canvas');
-            const ctx = finalCanvas.getContext('2d');
-
-            let newWidth, newHeight;
-
-            if (currentRatio > targetRatio) {
-                // Content is wider than 16:9 - use content width, expand height
-                newWidth = canvas.width;
-                newHeight = Math.round(newWidth / targetRatio);
-            } else {
-                // Content is taller than 16:9 - use content height, expand width
-                newHeight = canvas.height;
-                newWidth = Math.round(newHeight * targetRatio);
-            }
-
-            finalCanvas.width = newWidth;
-            finalCanvas.height = newHeight;
-
-            // Fill with background color
-            ctx.fillStyle = '#0f0f1a';
-            ctx.fillRect(0, 0, newWidth, newHeight);
-
-            // Center the original canvas content
-            const xOffset = Math.round((newWidth - canvas.width) / 2);
-            const yOffset = Math.round((newHeight - canvas.height) / 2);
-            ctx.drawImage(canvas, xOffset, yOffset);
+        if (!canvas || canvas.width === 0 || canvas.height === 0) {
+            throw new Error('Failed to generate rendering canvas.');
         }
 
-        // Create download link
         const link = document.createElement('a');
         link.download = `${currentSectionName.replace(/\s+/g, '_')}.png`;
-        link.href = finalCanvas.toDataURL('image/png');
+        link.href = canvas.toDataURL('image/png');
         link.click();
     } catch (error) {
         console.error('Failed to generate image:', error);
@@ -368,56 +440,20 @@ async function downloadAsPdf() {
         downloadPdfBtn.disabled = true;
         downloadPdfBtn.textContent = 'Generating...';
 
-        // Capture the export area (title + table only)
-        const canvas = await html2canvas(exportArea, {
-            backgroundColor: '#0f0f1a',
-            scale: 2,
-            useCORS: true,
-            logging: false
-        });
+        const { windowWidth, windowHeight } = getExportDimensions(exportArea);
+        const canvas = await html2canvas(exportArea, getExportConfig(windowWidth, windowHeight));
 
-        // Ensure 16:9 aspect ratio while keeping ALL content visible
-        const targetRatio = 16 / 9;
-        const currentRatio = canvas.width / canvas.height;
-
-        let finalCanvas = canvas;
-
-        if (Math.abs(currentRatio - targetRatio) > 0.01) {
-            finalCanvas = document.createElement('canvas');
-            const ctx = finalCanvas.getContext('2d');
-
-            let newWidth, newHeight;
-
-            if (currentRatio > targetRatio) {
-                // Content is wider than 16:9 - use content width, expand height
-                newWidth = canvas.width;
-                newHeight = Math.round(newWidth / targetRatio);
-            } else {
-                // Content is taller than 16:9 - use content height, expand width
-                newHeight = canvas.height;
-                newWidth = Math.round(newHeight * targetRatio);
-            }
-
-            finalCanvas.width = newWidth;
-            finalCanvas.height = newHeight;
-
-            ctx.fillStyle = '#0f0f1a';
-            ctx.fillRect(0, 0, newWidth, newHeight);
-
-            const xOffset = Math.round((newWidth - canvas.width) / 2);
-            const yOffset = Math.round((newHeight - canvas.height) / 2);
-            ctx.drawImage(canvas, xOffset, yOffset);
+        if (!canvas || canvas.width === 0 || canvas.height === 0) {
+            throw new Error('Failed to generate rendering canvas.');
         }
 
-        // Calculate PDF dimensions (landscape 16:9)
-        const imgData = finalCanvas.toDataURL('image/png');
-        const pdfWidth = finalCanvas.width;
-        const pdfHeight = finalCanvas.height;
+        const imgData = canvas.toDataURL('image/png');
+        const pdfWidth = canvas.width;
+        const pdfHeight = canvas.height;
 
-        // Use jsPDF
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF({
-            orientation: 'landscape',
+            orientation: pdfWidth > pdfHeight ? 'landscape' : 'portrait',
             unit: 'px',
             format: [pdfWidth / 2, pdfHeight / 2]
         });
