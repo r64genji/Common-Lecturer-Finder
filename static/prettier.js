@@ -341,6 +341,8 @@ async function downloadAsImage() {
             scale: 2,
             useCORS: true,
             logging: false,
+            width: windowWidth,
+            height: windowHeight,
             windowWidth: windowWidth,
             windowHeight: windowHeight,
             onclone: (clonedDoc) => {
@@ -366,7 +368,7 @@ async function downloadAsImage() {
                         clonedWrapper.style.flex = '1';
                         clonedWrapper.style.width = '100%';
                         clonedWrapper.style.minHeight = '0';
-                        clonedWrapper.style.overflow = 'hidden';
+                        clonedWrapper.style.overflow = 'visible';
                     }
 
                     const clonedTable = clonedExportArea.querySelector('.timetable');
@@ -432,6 +434,8 @@ async function downloadAsPdf() {
             scale: 2,
             useCORS: true,
             logging: false,
+            width: windowWidth,
+            height: windowHeight,
             windowWidth: windowWidth,
             windowHeight: windowHeight,
             onclone: (clonedDoc) => {
@@ -457,7 +461,7 @@ async function downloadAsPdf() {
                         clonedWrapper.style.flex = '1';
                         clonedWrapper.style.width = '100%';
                         clonedWrapper.style.minHeight = '0';
-                        clonedWrapper.style.overflow = 'hidden';
+                        clonedWrapper.style.overflow = 'visible';
                     }
 
                     const clonedTable = clonedExportArea.querySelector('.timetable');
