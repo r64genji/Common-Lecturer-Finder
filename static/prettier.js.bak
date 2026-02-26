@@ -336,44 +336,48 @@ function getSafeExportScale(windowWidth, windowHeight) {
     return Math.max(0.5, Math.min(2, safeScale));
 }
 
-function getExportConfig(scale) {
+function getExportConfig(windowWidth, windowHeight, scale) {
     return {
         backgroundColor: '#0f0f1a',
         scale: scale,
         useCORS: true,
-        logging: false
+        logging: false,
+        scrollX: 0,
+        scrollY: 0,
+        width: windowWidth,
+        height: windowHeight,
+        windowWidth: windowWidth,
+        windowHeight: windowHeight
     };
 }
 
 function createExportSnapshot(exportArea) {
     const snapshotHost = document.createElement('div');
     snapshotHost.style.position = 'fixed';
-    snapshotHost.style.left = '0';
+    snapshotHost.style.left = '-100000px';
     snapshotHost.style.top = '0';
-    snapshotHost.style.width = '0';
-    snapshotHost.style.height = '0';
-    snapshotHost.style.overflow = 'visible';
     snapshotHost.style.pointerEvents = 'none';
     snapshotHost.style.opacity = '0';
     snapshotHost.style.zIndex = '-1';
 
     const snapshot = exportArea.cloneNode(true);
-    snapshot.style.position = 'absolute';
-    snapshot.style.left = '0';
-    snapshot.style.top = '0';
     snapshotHost.appendChild(snapshot);
     document.body.appendChild(snapshotHost);
 
-    snapshot.style.width = EXPORT_TARGET_WIDTH + 'px';
-    snapshot.style.height = EXPORT_TARGET_HEIGHT + 'px';
-    snapshot.style.minHeight = EXPORT_TARGET_HEIGHT + 'px';
+    const windowWidth = EXPORT_TARGET_WIDTH;
+    const windowHeight = EXPORT_TARGET_HEIGHT;
+    const innerWidth = windowWidth - (EXPORT_PADDING * 2);
+
+    snapshot.style.width = windowWidth + 'px';
+    snapshot.style.height = windowHeight + 'px';
+    snapshot.style.minHeight = windowHeight + 'px';
     snapshot.style.display = 'flex';
     snapshot.style.flexDirection = 'column';
     snapshot.style.padding = EXPORT_PADDING + 'px';
     snapshot.style.boxSizing = 'border-box';
     snapshot.style.margin = '0';
     snapshot.style.backgroundColor = '#0f0f1a';
-    snapshot.style.overflow = 'hidden';
+    snapshot.style.overflow = 'visible';
 
     const clonedTitle = snapshot.querySelector('.section-title');
     if (clonedTitle) {
@@ -383,49 +387,31 @@ function createExportSnapshot(exportArea) {
         clonedTitle.style.width = '100%';
     }
 
-    const titleBlockHeight = clonedTitle
-        ? Math.ceil(clonedTitle.getBoundingClientRect().height + 36)
-        : 0;
-    const availableTableHeight = Math.max(
-        420,
-        EXPORT_TARGET_HEIGHT - (EXPORT_PADDING * 2) - titleBlockHeight
-    );
-
-    const tempBodyRows = snapshot.querySelectorAll('.timetable tbody tr').length || 5;
-    const headerHeight = 86;
-    const rowHeight = Math.max(
-        56,
-        Math.floor((availableTableHeight - headerHeight) / tempBodyRows)
-    );
-    const tableHeight = headerHeight + (rowHeight * tempBodyRows);
-    const textScale = Math.max(0.9, Math.min(1.25, rowHeight / 125));
-
     const clonedWrapper = snapshot.querySelector('.timetable-wrapper');
     if (clonedWrapper) {
         clonedWrapper.style.flex = '1 1 auto';
         clonedWrapper.style.width = '100%';
         clonedWrapper.style.maxWidth = 'none';
         clonedWrapper.style.minHeight = '0';
-        clonedWrapper.style.height = tableHeight + 'px';
-        clonedWrapper.style.maxHeight = tableHeight + 'px';
+        clonedWrapper.style.height = '100%';
         clonedWrapper.style.overflow = 'hidden';
     }
 
     const clonedTable = snapshot.querySelector('.timetable');
     if (clonedTable) {
-        clonedTable.style.width = '100%';
-        clonedTable.style.height = tableHeight + 'px';
+        clonedTable.style.width = innerWidth + 'px';
+        clonedTable.style.height = '100%';
         clonedTable.style.maxWidth = 'none';
         clonedTable.style.minWidth = '0';
         clonedTable.style.tableLayout = 'fixed';
-        clonedTable.style.borderCollapse = 'collapse';
 
         clonedTable.querySelectorAll('th').forEach(th => {
-            th.style.fontSize = (1.1 * textScale).toFixed(2) + 'rem';
-            th.style.height = headerHeight + 'px';
-            th.style.maxHeight = headerHeight + 'px';
-            th.style.padding = '10px 8px';
-            th.style.overflow = 'hidden';
+            th.style.fontSize = '1.35rem';
+            th.style.height = '90px';
+            th.style.minWidth = '0';
+        });
+        clonedTable.querySelectorAll('td').forEach(td => {
+            td.style.minWidth = '0';
         });
 
         clonedTable.querySelectorAll('.day-header, .day-cell').forEach(el => {
@@ -434,71 +420,43 @@ function createExportSnapshot(exportArea) {
             el.style.maxWidth = '80px';
         });
 
-        clonedTable.querySelectorAll('td').forEach(td => {
-            td.style.height = rowHeight + 'px';
-            td.style.maxHeight = rowHeight + 'px';
-            td.style.padding = '6px 8px';
-            td.style.overflow = 'hidden';
-            td.style.verticalAlign = 'top';
-        });
+        clonedTable.querySelectorAll('th .time-slot').forEach(el => el.style.fontSize = '1.1rem');
+        clonedTable.querySelectorAll('.course-name').forEach(el => el.style.fontSize = '1.35rem');
+        clonedTable.querySelectorAll('.course-code').forEach(el => el.style.fontSize = '1.2rem');
+        clonedTable.querySelectorAll('.course-location').forEach(el => el.style.fontSize = '1.1rem');
+        clonedTable.querySelectorAll('.course-lecturer').forEach(el => el.style.fontSize = '1.1rem');
+        clonedTable.querySelectorAll('.day-cell').forEach(el => el.style.fontSize = '1.35rem');
+        clonedTable.querySelectorAll('.break-content span').forEach(el => el.style.fontSize = '1.95rem');
 
-        clonedTable.querySelectorAll('tbody tr').forEach(tr => {
-            tr.style.height = rowHeight + 'px';
-            tr.style.maxHeight = rowHeight + 'px';
-        });
+        const titleBlockHeight = clonedTitle
+            ? Math.ceil(clonedTitle.getBoundingClientRect().height + 36)
+            : 0;
+        const availableTableHeight = Math.max(
+            420,
+            windowHeight - (EXPORT_PADDING * 2) - titleBlockHeight
+        );
+        const bodyRowCount = Math.max(1, clonedTable.querySelectorAll('tbody tr').length);
+        const headerHeight = 90;
+        const rowHeight = Math.max(60, Math.floor((availableTableHeight - headerHeight) / bodyRowCount));
 
-        clonedTable.querySelectorAll('th .time-slot').forEach(el => {
-            el.style.fontSize = (0.85 * textScale).toFixed(2) + 'rem';
+        clonedTable.style.height = availableTableHeight + 'px';
+        clonedTable.querySelectorAll('thead th').forEach(el => {
+            el.style.height = headerHeight + 'px';
         });
-        clonedTable.querySelectorAll('.course-cell').forEach(el => {
-            el.style.height = '100%';
-            el.style.padding = '4px 6px';
-            el.style.gap = '2px';
-            el.style.overflow = 'hidden';
-            el.style.justifyContent = 'flex-start';
-        });
-        clonedTable.querySelectorAll('.course-name').forEach(el => {
-            el.style.fontSize = (1.0 * textScale).toFixed(2) + 'rem';
-            el.style.marginBottom = '2px';
-            el.style.lineHeight = '1.15';
-            el.style.maxHeight = '2.3em';
-            el.style.overflow = 'hidden';
-        });
-        clonedTable.querySelectorAll('.course-code').forEach(el => {
-            el.style.fontSize = (0.85 * textScale).toFixed(2) + 'rem';
-            el.style.lineHeight = '1.15';
-            el.style.maxHeight = '1.2em';
-            el.style.overflow = 'hidden';
-        });
-        clonedTable.querySelectorAll('.course-location').forEach(el => {
-            el.style.fontSize = (0.74 * textScale).toFixed(2) + 'rem';
-            el.style.lineHeight = '1.15';
-            el.style.maxHeight = '2.3em';
-            el.style.overflow = 'hidden';
-        });
-        clonedTable.querySelectorAll('.course-lecturer').forEach(el => {
-            el.style.fontSize = (0.74 * textScale).toFixed(2) + 'rem';
-            el.style.lineHeight = '1.15';
-            el.style.maxHeight = '2.3em';
-            el.style.overflow = 'hidden';
-        });
-        clonedTable.querySelectorAll('.day-cell').forEach(el => {
-            el.style.fontSize = (1.0 * textScale).toFixed(2) + 'rem';
-        });
-        clonedTable.querySelectorAll('.break-content span').forEach(el => {
-            el.style.fontSize = (1.45 * textScale).toFixed(2) + 'rem';
+        clonedTable.querySelectorAll('tbody td').forEach(el => {
+            el.style.height = rowHeight + 'px';
         });
     }
 
-    return { snapshotHost, snapshot };
+    return { snapshotHost, snapshot, windowWidth, windowHeight };
 }
 
 async function renderExportCanvas(exportArea) {
-    const { snapshotHost, snapshot } = createExportSnapshot(exportArea);
+    const { snapshotHost, snapshot, windowWidth, windowHeight } = createExportSnapshot(exportArea);
 
     try {
-        const exportScale = getSafeExportScale(EXPORT_TARGET_WIDTH, EXPORT_TARGET_HEIGHT);
-        return await html2canvas(snapshot, getExportConfig(exportScale));
+        const exportScale = getSafeExportScale(windowWidth, windowHeight);
+        return await html2canvas(snapshot, getExportConfig(windowWidth, windowHeight, exportScale));
     } finally {
         snapshotHost.remove();
     }

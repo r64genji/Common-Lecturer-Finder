@@ -4,7 +4,7 @@ Compares our extracted data directly with the raw PDF table data.
 """
 import pymupdf
 from pathlib import Path
-from pdf_parser import parse_all_timetables
+from parsers.pdf_parser import parse_all_timetables
 
 
 def verify_all_sections():

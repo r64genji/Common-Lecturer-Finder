@@ -76,8 +76,8 @@ def parse_all_timetables(timetables_dir: str = None) -> dict:
     import json
     
     if timetables_dir is None:
-        # Default to 'timetables' folder in the same directory as this script
-        timetables_dir = Path(__file__).parent / 'timetables'
+        # Default to project-root timetables directory
+        timetables_dir = Path(__file__).resolve().parent.parent / 'timetables'
     else:
         timetables_dir = Path(timetables_dir)
     

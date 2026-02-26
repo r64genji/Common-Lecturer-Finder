@@ -3,9 +3,9 @@ Flask Web Application for Timetable Section Comparison
 """
 
 from flask import Flask, jsonify, send_from_directory, request
-from pdf_parser import parse_all_timetables, find_shared_lecturers
-from timetable_parser_visual import parse_timetable_pdf
-from web_parser import get_fspf_sections, get_web_timetable
+from parsers.pdf_parser import parse_all_timetables, find_shared_lecturers
+from parsers.timetable_parser_visual import parse_timetable_pdf
+from parsers.web_parser import get_fspf_sections, get_web_timetable
 import os
 import tempfile
 import threading
