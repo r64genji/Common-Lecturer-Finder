@@ -12,11 +12,28 @@ import threading
 
 app = Flask(__name__, static_folder='static')
 TIMETABLES_DIR = "timetables"
+IS_VERCEL = os.getenv("VERCEL") == "1"
+ALL_SECTIONS = {}
+_SECTIONS_LOAD_LOCK = threading.Lock()
+_SECTIONS_LOADED = False
 
-# Parse all timetables on startup
-print("Loading timetable data...")
-ALL_SECTIONS = parse_all_timetables()
-print(f"Loaded {len(ALL_SECTIONS)} sections")
+def ensure_sections_loaded():
+    """Load section data once, lazily, for serverless-friendly startup."""
+    global ALL_SECTIONS, _SECTIONS_LOADED
+    if _SECTIONS_LOADED:
+        return
+
+    with _SECTIONS_LOAD_LOCK:
+        if _SECTIONS_LOADED:
+            return
+        print("Loading timetable data...")
+        try:
+            ALL_SECTIONS = parse_all_timetables()
+            print(f"Loaded {len(ALL_SECTIONS)} sections")
+        except Exception as e:
+            print(f"Failed to load timetable data: {e}")
+            ALL_SECTIONS = {}
+        _SECTIONS_LOADED = True
 
 def warmup_cache():
     print("Warming up web parser sections cache...")
@@ -26,8 +43,10 @@ def warmup_cache():
     except Exception as e:
         print(f"Failed to warm up cache: {e}")
 
-# Start the warmup in a background thread
-threading.Thread(target=warmup_cache, daemon=True).start()
+# Keep local dev snappy while avoiding extra serverless background work.
+if not IS_VERCEL:
+    ensure_sections_loaded()
+    threading.Thread(target=warmup_cache, daemon=True).start()
 
 
 @app.route('/')
@@ -45,6 +64,7 @@ def prettier():
 @app.route('/api/sections')
 def get_sections():
     """Return list of all available section numbers"""
+    ensure_sections_loaded()
     # Reuse existing logic which is compatible (sections are int keys)
     sections = sorted(ALL_SECTIONS.keys())
     return jsonify({'sections': sections})
@@ -55,6 +75,7 @@ def get_prettier_sections():
     """Get list of available sections for the prettier tool from web parser"""
     sections = get_fspf_sections()
     if not sections:
+        ensure_sections_loaded()
         # Fallback to local PDFs
         sections = [{"id": str(sec), "name": f"SECTION {sec:02d}"} for sec in sorted(ALL_SECTIONS.keys())]
         
@@ -70,6 +91,7 @@ def get_shared_lecturers(section_id):
     For a given section, return courses with their lecturers
     and which other sections share the same lecturer.
     """
+    ensure_sections_loaded()
     if section_id not in ALL_SECTIONS:
         return jsonify({'error': 'Section not found'}), 404
     
