@@ -325,6 +325,85 @@ function setupDownloadListeners() {
     downloadPdfBtn.addEventListener('click', downloadAsPdf);
 }
 
+function getExportConfig(windowWidth, windowHeight) {
+    return {
+        backgroundColor: '#0f0f1a',
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        width: windowWidth,
+        height: windowHeight,
+        windowWidth: windowWidth,
+        windowHeight: windowHeight,
+        onclone: (clonedDoc) => {
+            // Force document width so that responsive CSS might trigger desktop mode
+            clonedDoc.documentElement.style.width = windowWidth + 'px';
+            clonedDoc.body.style.width = windowWidth + 'px';
+            clonedDoc.body.style.height = windowHeight + 'px';
+
+            const clonedExportArea = clonedDoc.getElementById('timetable-export');
+            if (clonedExportArea) {
+                clonedExportArea.style.width = windowWidth + 'px';
+                clonedExportArea.style.height = windowHeight + 'px';
+                clonedExportArea.style.display = 'flex';
+                clonedExportArea.style.flexDirection = 'column';
+                clonedExportArea.style.padding = '48px';
+                clonedExportArea.style.boxSizing = 'border-box';
+                clonedExportArea.style.margin = '0';
+                clonedExportArea.style.backgroundColor = '#0f0f1a';
+
+                const clonedTitle = clonedExportArea.querySelector('.section-title');
+                if (clonedTitle) {
+                    clonedTitle.style.flexShrink = '0';
+                    clonedTitle.style.marginBottom = '36px';
+                    clonedTitle.style.fontSize = '3rem';
+                }
+
+                const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
+                if (clonedWrapper) {
+                    clonedWrapper.style.flex = '1';
+                    clonedWrapper.style.width = '100%';
+                    clonedWrapper.style.minHeight = '0';
+                    clonedWrapper.style.overflow = 'visible';
+                }
+
+                const clonedTable = clonedExportArea.querySelector('.timetable');
+                if (clonedTable) {
+                    clonedTable.style.width = '100%';
+                    clonedTable.style.height = '100%';
+                    clonedTable.style.minWidth = 'auto'; // Reset mobile "min-width: 100%"
+                    clonedTable.style.tableLayout = 'fixed'; // Ensure equal columns
+
+                    // Optimize font sizes for 1920x1080 desktop export
+                    clonedTable.querySelectorAll('th').forEach(th => {
+                        th.style.fontSize = '1.35rem';
+                        th.style.height = '90px';
+                        th.style.minWidth = '0'; // Discard mobile "min-width: 120px"
+                    });
+                    clonedTable.querySelectorAll('td').forEach(td => {
+                        td.style.minWidth = '0'; // Discard mobile "min-width: 120px"
+                    });
+
+                    // Restore day-cell fixed width
+                    clonedTable.querySelectorAll('.day-header, .day-cell').forEach(el => {
+                        el.style.width = '80px';
+                        el.style.minWidth = '80px';
+                        el.style.maxWidth = '80px';
+                    });
+
+                    clonedTable.querySelectorAll('th .time-slot').forEach(el => el.style.fontSize = '1.1rem');
+                    clonedTable.querySelectorAll('.course-name').forEach(el => el.style.fontSize = '1.35rem');
+                    clonedTable.querySelectorAll('.course-code').forEach(el => el.style.fontSize = '1.2rem');
+                    clonedTable.querySelectorAll('.course-location').forEach(el => el.style.fontSize = '1.1rem');
+                    clonedTable.querySelectorAll('.course-lecturer').forEach(el => el.style.fontSize = '1.1rem');
+                    clonedTable.querySelectorAll('.day-cell').forEach(el => el.style.fontSize = '1.35rem');
+                    clonedTable.querySelectorAll('.break-content span').forEach(el => el.style.fontSize = '1.95rem');
+                }
+            }
+        }
+    };
+}
+
 async function downloadAsImage() {
     const exportArea = document.getElementById('timetable-export');
 
@@ -336,62 +415,7 @@ async function downloadAsImage() {
         const windowHeight = 1080;
 
         // Capture the export area (title + table only)
-        const canvas = await html2canvas(exportArea, {
-            backgroundColor: '#0f0f1a',
-            scale: 2,
-            useCORS: true,
-            logging: false,
-            width: windowWidth,
-            height: windowHeight,
-            windowWidth: windowWidth,
-            windowHeight: windowHeight,
-            onclone: (clonedDoc) => {
-                const clonedExportArea = clonedDoc.getElementById('timetable-export');
-                if (clonedExportArea) {
-                    clonedExportArea.style.width = windowWidth + 'px';
-                    clonedExportArea.style.height = windowHeight + 'px';
-                    clonedExportArea.style.display = 'flex';
-                    clonedExportArea.style.flexDirection = 'column';
-                    clonedExportArea.style.padding = '48px';
-                    clonedExportArea.style.boxSizing = 'border-box';
-                    clonedExportArea.style.margin = '0';
-
-                    const clonedTitle = clonedExportArea.querySelector('.section-title');
-                    if (clonedTitle) {
-                        clonedTitle.style.flexShrink = '0';
-                        clonedTitle.style.marginBottom = '36px';
-                        clonedTitle.style.fontSize = '3rem';
-                    }
-
-                    const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
-                    if (clonedWrapper) {
-                        clonedWrapper.style.flex = '1';
-                        clonedWrapper.style.width = '100%';
-                        clonedWrapper.style.minHeight = '0';
-                        clonedWrapper.style.overflow = 'visible';
-                    }
-
-                    const clonedTable = clonedExportArea.querySelector('.timetable');
-                    if (clonedTable) {
-                        clonedTable.style.width = '100%';
-                        clonedTable.style.height = '100%';
-
-                        // Optimize font sizes for 1920x1080 desktop export
-                        clonedTable.querySelectorAll('th').forEach(th => {
-                            th.style.fontSize = '1.35rem';
-                            th.style.height = '90px';
-                        });
-                        clonedTable.querySelectorAll('th .time-slot').forEach(el => el.style.fontSize = '1.1rem');
-                        clonedTable.querySelectorAll('.course-name').forEach(el => el.style.fontSize = '1.35rem');
-                        clonedTable.querySelectorAll('.course-code').forEach(el => el.style.fontSize = '1.2rem');
-                        clonedTable.querySelectorAll('.course-location').forEach(el => el.style.fontSize = '1.1rem');
-                        clonedTable.querySelectorAll('.course-lecturer').forEach(el => el.style.fontSize = '1.1rem');
-                        clonedTable.querySelectorAll('.day-cell').forEach(el => el.style.fontSize = '1.35rem');
-                        clonedTable.querySelectorAll('.break-content span').forEach(el => el.style.fontSize = '1.95rem');
-                    }
-                }
-            }
-        });
+        const canvas = await html2canvas(exportArea, getExportConfig(windowWidth, windowHeight));
 
         if (!canvas || canvas.width === 0 || canvas.height === 0) {
             throw new Error('Failed to generate rendering canvas.');
@@ -429,62 +453,7 @@ async function downloadAsPdf() {
         const windowHeight = 1080;
 
         // Capture the export area (title + table only)
-        const canvas = await html2canvas(exportArea, {
-            backgroundColor: '#0f0f1a',
-            scale: 2,
-            useCORS: true,
-            logging: false,
-            width: windowWidth,
-            height: windowHeight,
-            windowWidth: windowWidth,
-            windowHeight: windowHeight,
-            onclone: (clonedDoc) => {
-                const clonedExportArea = clonedDoc.getElementById('timetable-export');
-                if (clonedExportArea) {
-                    clonedExportArea.style.width = windowWidth + 'px';
-                    clonedExportArea.style.height = windowHeight + 'px';
-                    clonedExportArea.style.display = 'flex';
-                    clonedExportArea.style.flexDirection = 'column';
-                    clonedExportArea.style.padding = '48px';
-                    clonedExportArea.style.boxSizing = 'border-box';
-                    clonedExportArea.style.margin = '0';
-
-                    const clonedTitle = clonedExportArea.querySelector('.section-title');
-                    if (clonedTitle) {
-                        clonedTitle.style.flexShrink = '0';
-                        clonedTitle.style.marginBottom = '36px';
-                        clonedTitle.style.fontSize = '3rem';
-                    }
-
-                    const clonedWrapper = clonedExportArea.querySelector('.timetable-wrapper');
-                    if (clonedWrapper) {
-                        clonedWrapper.style.flex = '1';
-                        clonedWrapper.style.width = '100%';
-                        clonedWrapper.style.minHeight = '0';
-                        clonedWrapper.style.overflow = 'visible';
-                    }
-
-                    const clonedTable = clonedExportArea.querySelector('.timetable');
-                    if (clonedTable) {
-                        clonedTable.style.width = '100%';
-                        clonedTable.style.height = '100%';
-
-                        // Optimize font sizes for 1920x1080 desktop export
-                        clonedTable.querySelectorAll('th').forEach(th => {
-                            th.style.fontSize = '1.35rem';
-                            th.style.height = '90px';
-                        });
-                        clonedTable.querySelectorAll('th .time-slot').forEach(el => el.style.fontSize = '1.1rem');
-                        clonedTable.querySelectorAll('.course-name').forEach(el => el.style.fontSize = '1.35rem');
-                        clonedTable.querySelectorAll('.course-code').forEach(el => el.style.fontSize = '1.2rem');
-                        clonedTable.querySelectorAll('.course-location').forEach(el => el.style.fontSize = '1.1rem');
-                        clonedTable.querySelectorAll('.course-lecturer').forEach(el => el.style.fontSize = '1.1rem');
-                        clonedTable.querySelectorAll('.day-cell').forEach(el => el.style.fontSize = '1.35rem');
-                        clonedTable.querySelectorAll('.break-content span').forEach(el => el.style.fontSize = '1.95rem');
-                    }
-                }
-            }
-        });
+        const canvas = await html2canvas(exportArea, getExportConfig(windowWidth, windowHeight));
 
         if (!canvas || canvas.width === 0 || canvas.height === 0) {
             throw new Error('Failed to generate rendering canvas.');
